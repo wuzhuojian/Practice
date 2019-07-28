@@ -51,7 +51,7 @@ namespace selector
             this.timerCreatNum.Stop();
             string[] selectedNum ={
                                   this.txtSelector1.Text.Trim(),
-                                  this.txtSelector6.Text.Trim(),
+                                  this.txtSelector2.Text.Trim(),
                                   this.txtSelector3.Text.Trim(),
                                   this.txtSelector4.Text.Trim(),
                                   this.txtSelector5.Text.Trim(),
