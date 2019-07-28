@@ -43,7 +43,7 @@ namespace selector
             this.txtSelector4.Text = numList[3];
             this.txtSelector5.Text = numList[4];
             this.txtSelector6.Text = numList[5];
-            this.txtSelector7.Text = numList[6]; 
+            this.txtSelector7.Text = numList[6];
         }
         //开始选号
         private void btnSingleSelect_Click(object sender, EventArgs e)
@@ -66,13 +66,11 @@ namespace selector
             this.btnSingleSelectSuiji.Enabled = true;
             this.btnPrint.Enabled = true;
             this.btnClear.Enabled = true;
-            this.btnDel.Enabled = true;
-
         }
         //生成指定组的号码
-        private void btnGroupSelect_Click(object sender, EventArgs e)       
-      {
-         
+        private void btnGroupSelect_Click(object sender, EventArgs e)
+        {
+
             this.objSelector.CreatGroup(Convert.ToInt32(this.txtGroup.Text.Trim()));
             //显示选中的号码
             this.lbNumList.Items.Clear();
@@ -81,7 +79,6 @@ namespace selector
             this.btnSingleSelectSuiji.Enabled = true;
             this.btnPrint.Enabled = true;
             this.btnClear.Enabled = true;
-            this.btnDel.Enabled = true;
         }
         //清除选号
         private void btnClear_Click(object sender, EventArgs e)
@@ -102,33 +99,41 @@ namespace selector
             this.btnClear.Enabled = false;
             this.btnDel.Enabled = false;
         }
+        //行选择
+        private void numListMouse_Click(object sender, EventArgs e)
+        {
+            if (this.lbNumList.SelectedIndex != -1)
+            {
+                //设置按钮
+                this.btnDel.Enabled = true;
+            }
+        }
         //删除选定行
         private void btnDel_Click(object sender, EventArgs e)
         {
-            string[] strList ={"","",""};
-            strList[0] = Convert.ToString(lbNumList.SelectedItem); 
-            //while (this.lbNumList.SelectedIndex != -1)
-            //{
-                this.objSelector.SelectNums.Remove(strList);
-                this.lbNumList.Items.Remove(lbNumList.SelectedItem);
-                List<string []> NumList2 = this.objSelector.SelectNums;
-          //  }    
-            //刷新 
-            this.lbNumList.Items.Clear();
-            this.lbNumList.Items.AddRange(this.objSelector.GetPrintNums2(NumList2).ToArray()); 
-        }
+            if (this.lbNumList.SelectedIndex != -1)
+            {
+                this.objSelector.SelectNums.RemoveAt(this.lbNumList.SelectedIndex);
+                List<string[]> NumList2 = this.objSelector.SelectNums;
 
+                //刷新 
+                this.lbNumList.Items.Clear();
+                this.lbNumList.Items.AddRange(this.objSelector.GetPrintNums2(NumList2).ToArray());
+
+                //禁止按钮
+                this.btnDel.Enabled = false;
+            }
+        }
         //保存文件
         private void button7_Click(object sender, EventArgs e)
         {
-             NumList = objSelector.GetPrintNums();
+            NumList = objSelector.GetPrintNums();
             StreamWriter swList = new StreamWriter("SelectNumsList2.txt");
             foreach (string a in NumList)
             {
                 swList.WriteLine(a);
             }
             swList.Close();
-            }
         }
-      
+    }
 }

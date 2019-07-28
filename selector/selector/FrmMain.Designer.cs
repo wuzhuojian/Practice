@@ -130,6 +130,7 @@
             this.lbNumList.Name = "lbNumList";
             this.lbNumList.Size = new System.Drawing.Size(437, 259);
             this.lbNumList.TabIndex = 16;
+            this.lbNumList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.numListMouse_Click);
             // 
             // txtGroup
             // 
